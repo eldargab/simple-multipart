@@ -1,6 +1,13 @@
 {
   "name": "simple-multipart",
   "version": "0.0.0",
+  "description": "Multipart form serializer with Simple-Stream interface",
+  "keywords": [
+    "multipart",
+    "form",
+    "stream",
+    "simple stream"
+  ],
   "author": "Eldar Gabdullin <eldargab@gmail.com>",
   "repository": {
     "type": "git",
