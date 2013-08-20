@@ -60,4 +60,28 @@ describe('Simple multipart', function() {
       'abc'
     ])
   })
+
+  describe('Given a .filename option', function() {
+    it('Should serialize part as an attachment', function() {
+      form.field('a', 'b', {filename: 'folder/hello.html'})
+      expect([
+        '--boundary',
+        'Content-Type: text/html',
+        'Content-Disposition: attachment; name="a"; filename="hello.html"',
+        '',
+        'b'
+      ])
+    })
+
+    it('.type option should have precedence over mime determined from extension', function() {
+      form.field('a', 'b', {filename: 'folder/hello.html', type: 'text/plain'})
+      expect([
+        '--boundary',
+        'Content-Type: text/plain',
+        'Content-Disposition: attachment; name="a"; filename="hello.html"',
+        '',
+        'b'
+      ])
+    })
+  })
 })
