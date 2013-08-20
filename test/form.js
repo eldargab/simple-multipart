@@ -1,5 +1,6 @@
 var should = require('should')
-var helpers = require('simple-stream-helpers')
+var consume = require('./util/consume')
+var source = require('./util/source')
 var Form = require('..')
 
 describe('Simple multipart', function() {
@@ -12,7 +13,7 @@ describe('Simple multipart', function() {
   function expect(text) {
     var actual
 
-    helpers.consume(form)(function(err, chunks) {
+    consume(form)(function(err, chunks) {
       if (err) throw err
       actual = chunks.map(function(chunk) {
         (typeof chunk == 'string' || Buffer.isBuffer(chunk)).should.be.true
@@ -51,7 +52,7 @@ describe('Simple multipart', function() {
   })
 
   it('Should work with stream parts', function() {
-    var stream = helpers.arraySource(['a', 'b', 'c'])
+    var stream = source(['a', 'b', 'c'])
     form.field('f', stream)
     expect([
       '--boundary',
